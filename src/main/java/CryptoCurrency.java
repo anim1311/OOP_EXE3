@@ -39,7 +39,7 @@ public class CryptoCurrency {
     }
 
     public double getChangePercent(){
-        return (priceHistory[0] - priceHistory[1]) / priceHistory[1];
+        return (priceHistory[0] - priceHistory[1]) / priceHistory[1] * 100;
     }
 
     public double getAveragePrice(){
