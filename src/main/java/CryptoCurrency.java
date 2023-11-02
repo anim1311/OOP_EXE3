@@ -3,6 +3,7 @@ public class CryptoCurrency {
     private String symbol;
     private String name;
     private double priceHistory[] = new double[10];
+    private int activity = 0;
 
     public String getSymbol(){
         return this.symbol;
@@ -29,8 +30,13 @@ public class CryptoCurrency {
     }
 
     public void setCurrentPrice(double currentPrice){
-        priceHistory[1] = priceHistory[0];
+        
+        for (int i = priceHistory.length - 1; i > 0; i--) {
+            priceHistory[i] = priceHistory[i - 1];
+        }
         priceHistory[0] = currentPrice;
+        activity++;
+
     }
 
     CryptoCurrency(String symbol, String name){
@@ -44,12 +50,13 @@ public class CryptoCurrency {
 
     public double getAveragePrice(){
         
-        double avg = 0;
+        double sum = 0;
 
-        for(int i = 0; i < priceHistory.length;i++){
-            avg+= priceHistory[i];
+        for (double d : priceHistory) {
+            sum += d;
         }
 
-        return avg/priceHistory.length;
+        return sum/activity;
+    
     }
 }
